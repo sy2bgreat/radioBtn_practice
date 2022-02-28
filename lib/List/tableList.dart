@@ -44,28 +44,44 @@ class _TableListState extends State<TableList> {
         ],
       ),
       body: Center(
-          child: ListView.builder(
-        itemBuilder: (context, pile) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Image.asset(todolist[pile].imgPath,
-                    height: 100, width: 100, fit: BoxFit.contain),
-                SizedBox(
-                  width: 50,
-                  height: 50,
+        child: ListView.builder(
+          itemBuilder: (context, pile) {
+            return Dismissible(
+              background: Container(
+                color: Colors.red,
+                child: Text(
+                  "remove",
+                  style: TextStyle(fontSize: 80),
                 ),
-                Text(
-                  todolist[pile].workList,
-                  style: TextStyle(fontSize: 20),
-                )
-              ],
-            ),
-          );
-        },
-        itemCount: todolist.length,
-      )),
+              ),
+              key: ValueKey(todolist[pile]),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Image.asset(todolist[pile].imgPath,
+                        height: 100, width: 100, fit: BoxFit.contain),
+                    SizedBox(
+                      width: 50,
+                      height: 50,
+                    ),
+                    Text(
+                      todolist[pile].workList,
+                      style: TextStyle(fontSize: 20),
+                    )
+                  ],
+                ),
+              ),
+              onDismissed: (direction) {
+                setState(() {
+                  todolist.removeAt(pile);
+                });
+              },
+            );
+          },
+          itemCount: todolist.length,
+        ),
+      ),
     );
   }
 }
