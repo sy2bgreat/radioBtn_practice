@@ -51,7 +51,7 @@ class _TableListState extends State<TableList> {
                 color: Colors.red,
                 child: Text(
                   "remove",
-                  style: TextStyle(fontSize: 80),
+                  style: TextStyle(fontSize: 50, color: Colors.white),
                 ),
               ),
               key: ValueKey(todolist[pile]),
